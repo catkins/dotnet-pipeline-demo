@@ -18,7 +18,6 @@ pipeline.AddStep(new CommandStep
     Label = ":dotnet: Restore",
     Key = "restore",
     Command = "dotnet restore",
-    ArtifactPaths = "src/**/obj/**;test/**/obj/**",
     Plugins = misePlugin,
     Cache = cache,
 });
@@ -28,14 +27,10 @@ pipeline.AddStep(new CommandStep
 {
     Label = ":hammer: Build",
     Key = "build",
-    Command = "dotnet build --configuration Release --no-restore",
+    Command = "dotnet build --configuration Release",
     DependsOn = new[] { "restore" },
     ArtifactPaths = "src/**/bin/**;src/**/obj/**;test/**/bin/**;test/**/obj/**",
-    Plugins = new object[]
-    {
-        "mise#v1.1.1",
-        DownloadArtifacts("restore", ["src/**/obj/**", "test/**/obj/**"]),
-    },
+    Plugins = misePlugin,
     Cache = cache,
 });
 
