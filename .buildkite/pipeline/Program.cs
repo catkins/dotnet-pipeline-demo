@@ -2,6 +2,7 @@ using Buildkite.Sdk;
 using Buildkite.Sdk.Schema;
 
 var misePlugin = new object[] { "mise#v1.1.1" };
+var cache = ".buildkite/cache-volume";
 
 var pipeline = new Pipeline();
 
@@ -12,6 +13,7 @@ pipeline.AddStep(new CommandStep
     Key = "restore",
     Command = "dotnet restore",
     Plugins = misePlugin,
+    Cache = cache,
 });
 
 // Build all projects
@@ -22,6 +24,7 @@ pipeline.AddStep(new CommandStep
     Command = "dotnet build --configuration Release --no-restore",
     DependsOn = new[] { "restore" },
     Plugins = misePlugin,
+    Cache = cache,
 });
 
 // Test each project in a group
@@ -36,18 +39,21 @@ pipeline.AddStep(new GroupStep
             Label = ":dotnet: Shared.A Tests",
             Command = "dotnet test test/Shared.A.Tests --no-build --configuration Release",
             Plugins = misePlugin,
+            Cache = cache,
         },
         new CommandStep
         {
             Label = ":dotnet: App.A Tests",
             Command = "dotnet test test/App.A.Tests --no-build --configuration Release",
             Plugins = misePlugin,
+            Cache = cache,
         },
         new CommandStep
         {
             Label = ":dotnet: App.B Tests",
             Command = "dotnet test test/App.B.Tests --no-build --configuration Release",
             Plugins = misePlugin,
+            Cache = cache,
         },
     },
 });
