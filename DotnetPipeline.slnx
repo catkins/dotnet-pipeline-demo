@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/App.A/App.A.csproj" />
+    <Project Path="src/App.B/App.B.csproj" />
+    <Project Path="src/Shared.A/Shared.A.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/App.A.Tests/App.A.Tests.csproj" />
+    <Project Path="test/App.B.Tests/App.B.Tests.csproj" />
+    <Project Path="test/Shared.A.Tests/Shared.A.Tests.csproj" />
+  </Folder>
+</Solution>

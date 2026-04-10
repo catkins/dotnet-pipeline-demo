@@ -1,0 +1,3 @@
+steps:
+  - label: ":pipeline: Generate pipeline"
+    command: dotnet run --project .buildkite/pipeline | buildkite-agent pipeline upload
